@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,8 @@ import pagestate.xz.com.pagestate.multitype.ItemViewBinder;
 import pagestate.xz.com.pagestate.multitype.MultiTypeAdapter;
 import pagestate.xz.com.pagestate.refreshlayout.RefreshListenerAdapter;
 import pagestate.xz.com.pagestate.refreshlayout.TwinklingRefreshLayout;
+import pagestate.xz.com.pagestate.refreshlayout.header.bezierlayout.BezierLayout;
+import pagestate.xz.com.pagestate.refreshlayout.header.progresslayout.ProgressLayout;
 import pagestate.xz.com.pagestate.statepage.BaseStateActivity;
 
 /**
@@ -93,9 +96,9 @@ public abstract class BaseListActivity extends BaseStateActivity implements List
                 doLoadMore();
             }
         });
-//        MyHeaderView myHeaderView = new MyHeaderView(this);
-//        myHeaderView.set
-//        mRefreshLayout.setHeaderView(new MyHeaderView(this));
+
+        mRefreshLayout.setHeaderView(new MyHeaderView(this));
+        mRefreshLayout.setBottomView(new MyFooterView(this));
     }
 
     /**
