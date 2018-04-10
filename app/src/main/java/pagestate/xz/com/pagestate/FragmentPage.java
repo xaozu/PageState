@@ -1,34 +1,24 @@
 package pagestate.xz.com.pagestate;
 
-
 import android.os.Handler;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import pagestate.xz.com.pagestate.listpage.BaseListActivity;
 import pagestate.xz.com.pagestate.listpage.BaseListFragment;
-import pagestate.xz.com.pagestate.statepage.BaseStateActivity;
 
-public class MainActivity extends BaseListActivity {
+/**
+ * creator: zhulunjun
+ * time:    2018/4/10
+ * describe:
+ */
 
-    @Override
-    public int getLayoutResId() {
-        return R.layout.activity_main;
-    }
+public class FragmentPage extends BaseListFragment {
 
     @Override
     public void initView() {
         super.initView();
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fl_fragment, new FragmentPage());
-        transaction.commit();
-
-//        loading();
+        loading();
     }
 
     @Override
@@ -57,6 +47,4 @@ public class MainActivity extends BaseListActivity {
         }
         return list;
     }
-
-
 }

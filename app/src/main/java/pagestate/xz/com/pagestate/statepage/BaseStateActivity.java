@@ -6,6 +6,7 @@ import android.view.ViewStub;
 import android.widget.FrameLayout;
 
 import butterknife.BindView;
+import butterknife.Unbinder;
 import pagestate.xz.com.pagestate.page.BaseActivity;
 import pagestate.xz.com.pagestate.R;
 
@@ -19,7 +20,6 @@ import pagestate.xz.com.pagestate.R;
 
 public abstract class BaseStateActivity extends BaseActivity implements StatePageInterface{
 
-
     @BindView(R.id.fl_content)
     FrameLayout flContent;
     @BindView(R.id.stub_error)
@@ -28,9 +28,8 @@ public abstract class BaseStateActivity extends BaseActivity implements StatePag
     ViewStub stubEmpty;
     @BindView(R.id.stub_loading)
     ViewStub stubLoading;
-
-    private LoadingStateDelegate loadingStateDelegate;
-    public View mView;
+    public View successView;
+    private StatePageHandle mStatePageHandle;
     @Override
     public boolean haveRootView() {
         // 设置带状态的ContentView
@@ -41,30 +40,29 @@ public abstract class BaseStateActivity extends BaseActivity implements StatePag
 
     @Override
     public void initView() {
-        // 添加子类的视图
-        LayoutInflater inflater =  LayoutInflater.from(this);
-        mView = inflater.inflate(getLayoutResId(), flContent, true);
-        loadingStateDelegate = new LoadingStateDelegate(mView, stubLoading, stubError, stubEmpty);
+        mStatePageHandle = new StatePageHandle(this,this);
+        mStatePageHandle.initView(flContent, stubError, stubEmpty, stubLoading);
+        successView = mStatePageHandle.successView;
     }
 
     @Override
     public void success() {
-        loadingStateDelegate.setLoadingState(LoadingStateDelegate.STATE.SUCCEED);
+        mStatePageHandle.success();
     }
 
     @Override
     public void empty() {
-        loadingStateDelegate.setLoadingState(LoadingStateDelegate.STATE.EMPTY);
+        mStatePageHandle.empty();
     }
 
     @Override
     public void error() {
-        loadingStateDelegate.setLoadingState(LoadingStateDelegate.STATE.ERROR);
+        mStatePageHandle.error();
     }
 
     @Override
     public void loading() {
-        loadingStateDelegate.setLoadingState(LoadingStateDelegate.STATE.LOADING);
+        mStatePageHandle.loading();
     }
 
     @Override
@@ -76,4 +74,5 @@ public abstract class BaseStateActivity extends BaseActivity implements StatePag
     public void setError() {
 
     }
+
 }

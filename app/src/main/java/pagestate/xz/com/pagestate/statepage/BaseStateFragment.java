@@ -1,8 +1,11 @@
 package pagestate.xz.com.pagestate.statepage;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
+
+import java.util.logging.Logger;
 
 import butterknife.BindView;
 import pagestate.xz.com.pagestate.page.BaseFragment;
@@ -24,9 +27,8 @@ public abstract class BaseStateFragment extends BaseFragment implements StatePag
     ViewStub stubEmpty;
     @BindView(R.id.stub_loading)
     ViewStub stubLoading;
-
-    private LoadingStateDelegate loadingStateDelegate;
-
+    private StatePageHandle mStatePageHandle;
+    public View successView;
     @Override
     public boolean haveRootView() {
         // 设置带状态的ContentView
@@ -37,29 +39,29 @@ public abstract class BaseStateFragment extends BaseFragment implements StatePag
 
     @Override
     public void initView() {
-        // 添加子类的视图
-        View view = mInflater.inflate(getLayoutResId(), flContent, true);
-        loadingStateDelegate = new LoadingStateDelegate(view, stubLoading, stubError, stubEmpty);
+        mStatePageHandle = new StatePageHandle(getActivity(), this);
+        mStatePageHandle.initView(flContent, stubError, stubEmpty, stubLoading);
+        successView = mStatePageHandle.successView;
     }
 
     @Override
     public void success() {
-        loadingStateDelegate.setLoadingState(LoadingStateDelegate.STATE.SUCCEED);
+        mStatePageHandle.success();
     }
 
     @Override
     public void empty() {
-        loadingStateDelegate.setLoadingState(LoadingStateDelegate.STATE.EMPTY);
+        mStatePageHandle.empty();
     }
 
     @Override
     public void error() {
-        loadingStateDelegate.setLoadingState(LoadingStateDelegate.STATE.ERROR);
+        mStatePageHandle.error();
     }
 
     @Override
     public void loading() {
-        loadingStateDelegate.setLoadingState(LoadingStateDelegate.STATE.LOADING);
+        mStatePageHandle.loading();
     }
 
     @Override
@@ -71,6 +73,5 @@ public abstract class BaseStateFragment extends BaseFragment implements StatePag
     public void setError() {
 
     }
-
 
 }

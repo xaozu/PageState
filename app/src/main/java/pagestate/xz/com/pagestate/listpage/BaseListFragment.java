@@ -6,16 +6,15 @@ import java.util.List;
 
 import pagestate.xz.com.pagestate.R;
 import pagestate.xz.com.pagestate.multitype.ItemViewBinder;
-import pagestate.xz.com.pagestate.statepage.BaseStateActivity;
+import pagestate.xz.com.pagestate.statepage.BaseStateFragment;
 
 /**
  * creator: zhulunjun
  * time:    2018/3/8
  * describe: 带状态的列表页面
- *
  */
 
-public abstract class BaseListActivity extends BaseStateActivity implements ListPageInterface {
+public abstract class BaseListFragment extends BaseStateFragment implements ListPageInterface {
 
     private ListPageHandle mListPageHandle;
 
@@ -27,7 +26,7 @@ public abstract class BaseListActivity extends BaseStateActivity implements List
     @Override
     public void initView() {
         super.initView();
-        mListPageHandle = new ListPageHandle(this, successView, this, this);
+        mListPageHandle = new ListPageHandle(getActivity(), successView, this, this);
         mListPageHandle.initView();
     }
 
@@ -62,7 +61,6 @@ public abstract class BaseListActivity extends BaseStateActivity implements List
     @Override
     public void loadSuccess(List<?> data) {
         mListPageHandle.loadSuccess(data);
-
     }
 
     @Override
@@ -74,7 +72,6 @@ public abstract class BaseListActivity extends BaseStateActivity implements List
     @Override
     public void replaceData(List<?> data) {
         mListPageHandle.replaceData(data);
-
     }
 
     /**
