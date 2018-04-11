@@ -34,7 +34,8 @@ public class FragmentPage extends BaseListFragment {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                loadSuccess(getTextData());
+//                loadSuccess(getTextData());
+                empty("没有数据，点击重新加载");
             }
         },2000);
 

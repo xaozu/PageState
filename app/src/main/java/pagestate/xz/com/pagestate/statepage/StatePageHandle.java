@@ -2,11 +2,14 @@ package pagestate.xz.com.pagestate.statepage;
 
 import android.content.Context;
 import android.support.annotation.IdRes;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +30,9 @@ public class StatePageHandle implements StatePageInterface {
     ViewStub stubError;
     ViewStub stubEmpty;
     ViewStub stubLoading;
+
+    private TextView textEmpty, textError;
+    private ImageView imageEmpty, imageError;
 
     private LoadingStateDelegate loadingStateDelegate;
     public View successView;
@@ -50,7 +56,6 @@ public class StatePageHandle implements StatePageInterface {
         LayoutInflater inflater =  LayoutInflater.from(mContext);
         successView = inflater.inflate(mPage.getLayoutResId(), flContent, true);
         loadingStateDelegate = new LoadingStateDelegate(successView, stubLoading, stubError, stubEmpty);
-
     }
 
     @Override
@@ -60,12 +65,57 @@ public class StatePageHandle implements StatePageInterface {
 
     @Override
     public void empty() {
+        empty(-1, null);
+    }
+
+    @Override
+    public void empty(String emptyStr) {
+        empty(-1, emptyStr);
+    }
+
+    @Override
+    public void empty(int imageRes, String emptyStr) {
         loadingStateDelegate.setLoadingState(LoadingStateDelegate.STATE.EMPTY);
+        if(imageEmpty == null || textEmpty == null){
+            getEmptyView();
+        }
+        // 图片
+        if(imageRes != -1){
+            imageEmpty.setImageResource(imageRes);
+        }
+        // 文本
+        if (!TextUtils.isEmpty(emptyStr)){
+            textEmpty.setText(emptyStr);
+        }
+
+
     }
 
     @Override
     public void error() {
+        error(-1, null);
+    }
+
+    @Override
+    public void error(String errorStr) {
+        error(-1, errorStr);
+    }
+
+    @Override
+    public void error(int imageRes, String errorStr) {
         loadingStateDelegate.setLoadingState(LoadingStateDelegate.STATE.ERROR);
+        if(imageError == null || textError == null){
+            getErrorView();
+        }
+        // 图片
+        if(imageRes != -1){
+            imageError.setImageResource(imageRes);
+        }
+        // 文本
+        if (!TextUtils.isEmpty(errorStr)){
+            textError.setText(errorStr);
+        }
+
     }
 
     @Override
@@ -73,13 +123,16 @@ public class StatePageHandle implements StatePageInterface {
         loadingStateDelegate.setLoadingState(LoadingStateDelegate.STATE.LOADING);
     }
 
-    @Override
-    public void setEmpty() {
+    private void getEmptyView(){
 
+        textEmpty = stubEmpty.findViewById(R.id.tv_empty);
+        imageEmpty = stubEmpty.findViewById(R.id.iv_empty);
+        Log.e("错误信息 "," "+(textEmpty==null)+" "+(imageEmpty==null)+" "+(stubEmpty==null));
     }
 
-    @Override
-    public void setError() {
-
+    private void getErrorView(){
+        textError = stubError.findViewById(R.id.tv_error);
+        imageError = stubError.findViewById(R.id.iv_error);
     }
+
 }

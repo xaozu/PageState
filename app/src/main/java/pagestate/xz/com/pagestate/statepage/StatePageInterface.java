@@ -12,12 +12,17 @@ public interface StatePageInterface {
 
     void empty();
 
+    void empty(String emptyStr);
+
+    void empty(int imageRes, String emptyStr);
+
     void error();
+
+    void error(String errorStr);
+
+    void error(int imageRes, String errorStr);
 
     void loading();
 
-    void setEmpty();
-
-    void setError();
 
 }

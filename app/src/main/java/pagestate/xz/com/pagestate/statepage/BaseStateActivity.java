@@ -66,13 +66,22 @@ public abstract class BaseStateActivity extends BaseActivity implements StatePag
     }
 
     @Override
-    public void setEmpty() {
-
+    public void empty(String emptyStr) {
+        mStatePageHandle.empty(emptyStr);
     }
 
     @Override
-    public void setError() {
-
+    public void empty(int imageRes, String emptyStr) {
+        mStatePageHandle.empty(imageRes, emptyStr);
     }
 
+    @Override
+    public void error(String errorStr) {
+        mStatePageHandle.error(errorStr);
+    }
+
+    @Override
+    public void error(int imageRes, String errorStr) {
+        mStatePageHandle.error(imageRes, errorStr);
+    }
 }

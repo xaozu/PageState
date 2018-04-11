@@ -19,13 +19,14 @@ public class BallPulseIndicator extends Indicator {
     @Override
     public void draw(Canvas canvas, Paint paint) {
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(3);
+        paint.setStrokeWidth(6);
+        paint.setColor(Color.GREEN);
 
         Paint bigPaint = new Paint();
-        bigPaint.setStrokeWidth(5);
+        bigPaint.setStrokeWidth(6);
         bigPaint.setStyle(Paint.Style.STROKE);
         bigPaint.setAntiAlias(true);
-        bigPaint.setColor(Color.BLACK);
+        bigPaint.setColor(Color.GRAY);
 
         float circleSpacing=12;
         float x = (getWidth()) / 2;
