@@ -27,9 +27,9 @@ import pagestate.xz.com.pagestate.page.PageInterFace;
 public class StatePageHandle implements StatePageInterface {
 
     FrameLayout flContent;
-    ViewStub stubError;
-    ViewStub stubEmpty;
-    ViewStub stubLoading;
+    private View viewError;
+    private View viewEmpty;
+    private View viewLoading;
 
     private TextView textEmpty, textError;
     private ImageView imageEmpty, imageError;
@@ -47,15 +47,15 @@ public class StatePageHandle implements StatePageInterface {
     /**
      * 初始化控件
      */
-    public void initView(FrameLayout flContent, ViewStub stubError, ViewStub stubEmpty, ViewStub stubLoading){
+    public void initView(FrameLayout flContent, View viewError, View viewEmpty, View viewLoading){
         this.flContent = flContent;
-        this.stubError = stubError;
-        this.stubEmpty = stubEmpty;
-        this.stubLoading = stubLoading;
+        this.viewError = viewError;
+        this.viewEmpty = viewEmpty;
+        this.viewLoading = viewLoading;
         // 添加子类的视图
         LayoutInflater inflater =  LayoutInflater.from(mContext);
         successView = inflater.inflate(mPage.getLayoutResId(), flContent, true);
-        loadingStateDelegate = new LoadingStateDelegate(successView, stubLoading, stubError, stubEmpty);
+        loadingStateDelegate = new LoadingStateDelegate(successView, viewLoading, viewError, viewEmpty);
     }
 
     @Override
@@ -124,15 +124,13 @@ public class StatePageHandle implements StatePageInterface {
     }
 
     private void getEmptyView(){
-
-        textEmpty = stubEmpty.findViewById(R.id.tv_empty);
-        imageEmpty = stubEmpty.findViewById(R.id.iv_empty);
-        Log.e("错误信息 "," "+(textEmpty==null)+" "+(imageEmpty==null)+" "+(stubEmpty==null));
+        textEmpty = viewEmpty.findViewById(R.id.tv_empty);
+        imageEmpty = viewEmpty.findViewById(R.id.iv_empty);
     }
 
     private void getErrorView(){
-        textError = stubError.findViewById(R.id.tv_error);
-        imageError = stubError.findViewById(R.id.iv_error);
+        textError = viewError.findViewById(R.id.tv_error);
+        imageError = viewError.findViewById(R.id.iv_error);
     }
 
 }

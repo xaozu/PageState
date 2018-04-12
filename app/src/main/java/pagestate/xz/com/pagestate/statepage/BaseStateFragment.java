@@ -21,12 +21,12 @@ public abstract class BaseStateFragment extends BaseFragment implements StatePag
 
     @BindView(R.id.fl_content)
     FrameLayout flContent;
-    @BindView(R.id.stub_error)
-    ViewStub stubError;
-    @BindView(R.id.stub_empty)
-    ViewStub stubEmpty;
-    @BindView(R.id.stub_loading)
-    ViewStub stubLoading;
+    @BindView(R.id.view_error)
+    View viewError;
+    @BindView(R.id.view_empty)
+    View viewEmpty;
+    @BindView(R.id.view_loading)
+    View viewLoading;
     private StatePageHandle mStatePageHandle;
     public View successView;
     @Override
@@ -40,7 +40,7 @@ public abstract class BaseStateFragment extends BaseFragment implements StatePag
     @Override
     public void initView() {
         mStatePageHandle = new StatePageHandle(getActivity(), this);
-        mStatePageHandle.initView(flContent, stubError, stubEmpty, stubLoading);
+        mStatePageHandle.initView(flContent, viewError, viewEmpty, viewLoading);
         successView = mStatePageHandle.successView;
     }
 

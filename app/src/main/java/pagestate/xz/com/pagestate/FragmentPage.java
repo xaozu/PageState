@@ -35,7 +35,8 @@ public class FragmentPage extends BaseListFragment {
             @Override
             public void run() {
 //                loadSuccess(getTextData());
-                empty("没有数据，点击重新加载");
+//                empty("没有数据，点击重新加载");
+                error("服务器异常(500)");
             }
         },2000);
 

@@ -10,22 +10,28 @@
         android:layout_height="match_parent"/>
 
 
-    <ViewStub
-        android:id="@+id/stub_error"
+    <include
+        android:id="@+id/view_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/layout_state_error"/>
+        layout="@layout/layout_state_error"
+        android:visibility="gone"
+        />
 
-    <ViewStub
-        android:id="@+id/stub_empty"
+    <include
+        android:id="@+id/view_empty"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/layout_state_empty"/>
+        layout="@layout/layout_state_empty"
+        android:visibility="gone"
+        />
 
-    <ViewStub
-        android:id="@+id/stub_loading"
+    <include
+        android:id="@+id/view_loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout="@layout/layout_state_loading"/>
+        layout="@layout/layout_state_loading"
+        android:visibility="gone"
+        />
 
-</RelativeLayout >
+</RelativeLayout>

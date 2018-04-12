@@ -2,6 +2,7 @@ package pagestate.xz.com.pagestate.statepage;
 
 import android.support.annotation.IntDef;
 import android.view.View;
+import android.view.ViewStub;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
